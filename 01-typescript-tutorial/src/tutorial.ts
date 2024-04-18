@@ -32,16 +32,61 @@
 // - If the input is of type string, the function should convert the string to uppercase and log the result to the console.
 
 
-function processInput(data: number | string) {
+// function processInput(data: number | string) {
+//
+//
+//     if (typeof data === 'number') {
+//         return data * 2
+//
+//     } else if (typeof data === 'string') {
+//         return data.toUpperCase();
+//     }
+// }
+//
+// const result = processInput(505);
+// console.log(result);
 
 
-    if (typeof data === 'number') {
-        return data * 2
+//  function createObject({id}: {id: number}): {
+//         id: number,
+//         isActive: boolean
+//  } {
+//     return {
+//         id,
+//         isActive: id % 2 === 0
+//     }
+//  }
+//
+//  const person1 = createObject({id: 4});
+//
+// console.log(person1);
 
-    } else if (typeof data === 'string') {
-        return data.toUpperCase();
+
+// ## Challenge 3
+//
+// Your task is to create a function named processData that accepts two parameters:
+//
+//     - The first parameter, input, should be a union type that can be either a string or a number.
+// - The second parameter, config, should be an object with a reverse property of type boolean, by default it "reverse" should be false
+//
+// The function should behave as follows:
+//
+// - If input is of type number, the function should return the square of the number.
+// - If input is of type string, the function should return the string in uppercase.
+// - If the reverse property on the config object is true, and input is a string, the function should return the reversed string in uppercase.
+
+
+function processData(input: string | number, config: {reverse: boolean} = {reverse: false}): string | number {
+
+    if (typeof input === 'number') {
+        return input*input;
+
+    } else {
+        return config.reverse? input.toUpperCase().split('').reverse().join('') : input.toUpperCase()
     }
+
 }
 
-const result = processInput(505);
-console.log(result);
+console.log(processData('dupa', {reverse: true}));
+console.log(processData('dupa'));
+console.log(processData(4));
