@@ -76,17 +76,91 @@
 // - If the reverse property on the config object is true, and input is a string, the function should return the reversed string in uppercase.
 
 
-function processData(input: string | number, config: {reverse: boolean} = {reverse: false}): string | number {
+// function processData(input: string | number, config: {reverse: boolean} = {reverse: false}): string | number {
+//
+//     if (typeof input === 'number') {
+//         return input*input;
+//
+//     } else {
+//         return config.reverse? input.toUpperCase().split('').reverse().join('') : input.toUpperCase()
+//     }
+//
+// }
+//
+// console.log(processData('dupa', {reverse: true}));
+// console.log(processData('dupa'));
+// console.log(processData(4));
 
-    if (typeof input === 'number') {
-        return input*input;
 
+
+// type User = { id: number; name: string; isActive: boolean }
+//
+// const john: User = {
+//     id: 1,
+//     name: 'john',
+//     isActive: true,
+// };
+// const susan: User = {
+//     id: 1,
+//     name: 'susan',
+//     isActive: false,
+// };
+//
+// function createUser(user: User): User {
+//     console.log(`Hello there ${user.name.toUpperCase()} !!!`);
+//
+//     return user;
+// }
+
+
+// # Challenge 4
+//
+// - Define the Employee type: Create a type Employee with properties id (number), name (string), and department (string).
+//
+// - Define the Manager type: Create a type Manager with properties id (number), name (string), and employees (an array of Employee).
+//
+// - Create a Union Type: Define a type Staff that is a union of Employee and Manager.
+//
+// - Create the printStaffDetails function: This function should accept a parameter of type Staff. Inside the function, use a type guard to check if the 'employees' property exists in the passed object. If it does, print a message indicating that the person is a manager and the number of employees they manage. If it doesn't, print a message indicating that the person is an employee and the department they belong to.
+//
+// - Create Employee and Manager objects: Create two Employee objects. One named alice and second named steve. Also create a Manager object named bob who manages alice and steve.
+//
+// - Test the function: Call the printStaffDetails function with alice and bob as arguments and verify the output.
+
+
+type Employee = { id: number; name: string; department: string };
+type Manager = { id: number; name: string; employess: Employee[] };
+
+type Staff = Employee | Manager;
+
+
+
+function printStaffDetails(person: Staff) {
+    if ('employess' in person) {
+        return `This person is Manager, he manage ${person.employess.length}`
     } else {
-        return config.reverse? input.toUpperCase().split('').reverse().join('') : input.toUpperCase()
+        return `This person is standard Employee, he belongs to ${person.department} department.`
     }
-
 }
 
-console.log(processData('dupa', {reverse: true}));
-console.log(processData('dupa'));
-console.log(processData(4));
+const roman: Employee = {
+    id: 1,
+    name: 'Roman',
+    department: 'Cleaning'
+}
+
+const bozena: Employee = {
+    id: 2,
+    name: 'Bozena',
+    department: 'Cleaning'
+}
+
+const edward: Manager = {
+    id: 11,
+    name: 'Edward',
+    employess: [roman, bozena]
+}
+
+
+console.log(printStaffDetails(roman));
+console.log(printStaffDetails(edward));
