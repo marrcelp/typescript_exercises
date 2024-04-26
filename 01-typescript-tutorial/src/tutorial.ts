@@ -127,40 +127,83 @@
 //
 // - Test the function: Call the printStaffDetails function with alice and bob as arguments and verify the output.
 
+//
+// type Employee = { id: number; name: string; department: string };
+// type Manager = { id: number; name: string; employess: Employee[] };
+//
+// type Staff = Employee | Manager;
+//
+//
+//
+// function printStaffDetails(person: Staff) {
+//     if ('employess' in person) {
+//         return `This person is Manager, he manage ${person.employess.length}`
+//     } else {
+//         return `This person is standard Employee, he belongs to ${person.department} department.`
+//     }
+// }
+//
+// const roman: Employee = {
+//     id: 1,
+//     name: 'Roman',
+//     department: 'Cleaning'
+// }
+//
+// const bozena: Employee = {
+//     id: 2,
+//     name: 'Bozena',
+//     department: 'Cleaning'
+// }
+//
+// const edward: Manager = {
+//     id: 11,
+//     name: 'Edward',
+//     employess: [roman, bozena]
+// }
+//
+//
+// console.log(printStaffDetails(roman));
+// console.log(printStaffDetails(edward));
 
-type Employee = { id: number; name: string; department: string };
-type Manager = { id: number; name: string; employess: Employee[] };
+// ## Challenge 5
+//
+// - Start by defining an interface Computer using the interface keyword. This will serve as a blueprint for objects that will be of this type.
+// - Inside the interface, define the properties that the object should have. In this case, we have id, brand, ram, and storage.
+// - Use the readonly keyword before the id property to indicate that it cannot be changed once it's set.
+// - Use the ? after the storage property to indicate that this property is optional and may not exist on all objects of this type.
+// - Also inside the interface, define any methods that the object should have. In this case, we have upgradeRam, which is a function that takes a number and returns a number.
+// - Now that we have our interface, we can create an object that adheres to this interface. This object should have all the properties defined in the interface (except for optional ones, which are... optional), and the methods should be implemented.
+// - Finally, we can use our object. We can call its upgradeRam method to increase its RAM.
 
-type Staff = Employee | Manager;
 
+interface Computer {
+    readonly id: number,
+    brand: string,
+    ram: number,
+    storage?: number | string
 
+    upgradeRam(ram: number): number
+}
 
-function printStaffDetails(person: Staff) {
-    if ('employess' in person) {
-        return `This person is Manager, he manage ${person.employess.length}`
-    } else {
-        return `This person is standard Employee, he belongs to ${person.department} department.`
+const dell: Computer = {
+    id: 123,
+    brand: 'Dell',
+    ram: 8,
+    storage: '256 gb',
+
+    upgradeRam(number) {
+        this.ram = number;
+        return this.ram
     }
 }
 
-const roman: Employee = {
-    id: 1,
-    name: 'Roman',
-    department: 'Cleaning'
-}
+console.log(dell.id);
+console.log(dell.brand);
+console.log(dell.ram);
+console.log(dell.storage);
 
-const bozena: Employee = {
-    id: 2,
-    name: 'Bozena',
-    department: 'Cleaning'
-}
+const increaseRam = dell.upgradeRam(16);
+console.log(dell.ram);
+console.log(increaseRam);
 
-const edward: Manager = {
-    id: 11,
-    name: 'Edward',
-    employess: [roman, bozena]
-}
-
-
-console.log(printStaffDetails(roman));
-console.log(printStaffDetails(edward));
+console.log(dell);
