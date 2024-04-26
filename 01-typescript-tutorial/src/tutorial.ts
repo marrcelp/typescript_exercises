@@ -260,4 +260,14 @@ function getEmployee(): Person | DogOwner | Manager {
 }
 
 const employee: Person | DogOwner | Manager = getEmployee();
+
+function isManager (myObject: Person | DogOwner | Manager): myObject is Manager {
+    return 'managePeople' in myObject;
+}
+
+if (isManager(employee)) {
+    employee.delegateTasks();
+    employee.managePeople();
+}
+
 console.log(employee);
