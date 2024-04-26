@@ -175,35 +175,89 @@
 // - Now that we have our interface, we can create an object that adheres to this interface. This object should have all the properties defined in the interface (except for optional ones, which are... optional), and the methods should be implemented.
 // - Finally, we can use our object. We can call its upgradeRam method to increase its RAM.
 
+//
+// interface Computer {
+//     readonly id: number,
+//     brand: string,
+//     ram: number,
+//     storage?: number | string
+//
+//     upgradeRam(ram: number): number
+// }
+//
+// const dell: Computer = {
+//     id: 123,
+//     brand: 'Dell',
+//     ram: 8,
+//     storage: '256 gb',
+//
+//     upgradeRam(number) {
+//         this.ram = number;
+//         return this.ram
+//     }
+// }
+//
+// console.log(dell.id);
+// console.log(dell.brand);
+// console.log(dell.ram);
+// console.log(dell.storage);
+//
+// const increaseRam = dell.upgradeRam(16);
+// console.log(dell.ram);
+// console.log(increaseRam);
+//
+// console.log(dell);
 
-interface Computer {
-    readonly id: number,
-    brand: string,
-    ram: number,
-    storage?: number | string
+//
+// ## Challenge 6 - Part 1
+//
+// - Define the Person interface Start by defining a Person interface with a name property of type string.
+// - Define the DogOwner interface Next, define a DogOwner interface that extends Person and adds a dogName property of type string.
+// - Define the Manager interface Then, define a Manager interface that extends Person and adds two methods: managePeople and delegateTasks. Both methods should have a return type of void.
+// - Define the getEmployee function Now, define a function called getEmployee that returns a Person, DogOwner, or Manager. Inside this function, generate a random number and use it to decide which type of object to return. If the number is less than 0.33, return a Person. If it's less than 0.66, return a DogOwner. Otherwise, return a Manager.
+// - Finally, create a variable called employee that can be a Person, DogOwner, or Manager, and assign it the return value of getEmployee. Then, log employee to the console.
 
-    upgradeRam(ram: number): number
+interface Person {
+    name: string,
+
 }
 
-const dell: Computer = {
-    id: 123,
-    brand: 'Dell',
-    ram: 8,
-    storage: '256 gb',
+interface DogOwner extends Person {
+    dogName: string,
+}
 
-    upgradeRam(number) {
-        this.ram = number;
-        return this.ram
+interface Manager extends Person {
+    managePeople(): void,
+    delegateTasks():void
+}
+
+function getEmployee(): Person | DogOwner | Manager {
+    const randomNumber = Math.random();
+    console.log(randomNumber);
+
+    if (randomNumber < 0.33) {
+        return {
+            name: 'John'
+        }
+
+    } else if (randomNumber > 0.33 && randomNumber < 0.66){
+        return  {
+            name: 'Tomek',
+            dogName: 'Azor'
+        }
+    } else {
+        return {
+            name: 'Janusz',
+            managePeople() {
+                console.log('Janusz zarzadza')
+            },
+            delegateTasks() {
+                console.log('Janusz deleguje')
+            }
+        }
+
     }
 }
 
-console.log(dell.id);
-console.log(dell.brand);
-console.log(dell.ram);
-console.log(dell.storage);
-
-const increaseRam = dell.upgradeRam(16);
-console.log(dell.ram);
-console.log(increaseRam);
-
-console.log(dell);
+const employee: Person | DogOwner | Manager = getEmployee();
+console.log(employee);
