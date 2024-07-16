@@ -216,58 +216,94 @@
 // - Define the Manager interface Then, define a Manager interface that extends Person and adds two methods: managePeople and delegateTasks. Both methods should have a return type of void.
 // - Define the getEmployee function Now, define a function called getEmployee that returns a Person, DogOwner, or Manager. Inside this function, generate a random number and use it to decide which type of object to return. If the number is less than 0.33, return a Person. If it's less than 0.66, return a DogOwner. Otherwise, return a Manager.
 // - Finally, create a variable called employee that can be a Person, DogOwner, or Manager, and assign it the return value of getEmployee. Then, log employee to the console.
+//
+// interface Person {
+//     name: string,
+//
+// }
+//
+// interface DogOwner extends Person {
+//     dogName: string,
+// }
+//
+// interface Manager extends Person {
+//     managePeople(): void,
+//     delegateTasks():void
+// }
+//
+// function getEmployee(): Person | DogOwner | Manager {
+//     const randomNumber = Math.random();
+//     console.log(randomNumber);
+//
+//     if (randomNumber < 0.33) {
+//         return {
+//             name: 'John'
+//         }
+//
+//     } else if (randomNumber > 0.33 && randomNumber < 0.66){
+//         return  {
+//             name: 'Tomek',
+//             dogName: 'Azor'
+//         }
+//     } else {
+//         return {
+//             name: 'Janusz',
+//             managePeople() {
+//                 console.log('Janusz zarzadza')
+//             },
+//             delegateTasks() {
+//                 console.log('Janusz deleguje')
+//             }
+//         }
+//
+//     }
+// }
+//
+// const employee: Person | DogOwner | Manager = getEmployee();
+//
+// function isManager (myObject: Person | DogOwner | Manager): myObject is Manager {
+//     return 'managePeople' in myObject;
+// }
+//
+// if (isManager(employee)) {
+//     employee.delegateTasks();
+//     employee.managePeople();
+// }
+//
+// console.log(employee);
 
-interface Person {
+// ------------------
+// TOPIC: TUPLE & ENUMS
+// ##Challenge 7
+// Define an enum named UserRole with members Admin, Manager, and Employee.
+//     Define a type alias named User with properties id (number), name (string), role (UserRole), and contact (a tuple with two elements: email as string and phone as string).
+// Define a function named createUser that takes a User object as its parameter and returns a User object.
+//     Call the createUser function with an object that matches the User type, store the result in a variable, and log the variable to the console.
+
+enum UserRole {
+    Admin,
+    Manager,
+    Employee,
+}
+
+type User = {
+    id: number,
     name: string,
+    role: UserRole,
+    contact: [string, string],
+};
 
+function createUser(user: User): User {
+    return user;
 }
 
-interface DogOwner extends Person {
-    dogName: string,
+const user11: User = {
+    id: 11,
+    name: 'Bogdan',
+    role: UserRole.Employee,
+    contact: ['bogdan@email.com', '606111555']
 }
 
-interface Manager extends Person {
-    managePeople(): void,
-    delegateTasks():void
-}
+const result = createUser(user11);
+console.log(result);
 
-function getEmployee(): Person | DogOwner | Manager {
-    const randomNumber = Math.random();
-    console.log(randomNumber);
-
-    if (randomNumber < 0.33) {
-        return {
-            name: 'John'
-        }
-
-    } else if (randomNumber > 0.33 && randomNumber < 0.66){
-        return  {
-            name: 'Tomek',
-            dogName: 'Azor'
-        }
-    } else {
-        return {
-            name: 'Janusz',
-            managePeople() {
-                console.log('Janusz zarzadza')
-            },
-            delegateTasks() {
-                console.log('Janusz deleguje')
-            }
-        }
-
-    }
-}
-
-const employee: Person | DogOwner | Manager = getEmployee();
-
-function isManager (myObject: Person | DogOwner | Manager): myObject is Manager {
-    return 'managePeople' in myObject;
-}
-
-if (isManager(employee)) {
-    employee.delegateTasks();
-    employee.managePeople();
-}
-
-console.log(employee);
