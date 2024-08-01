@@ -328,24 +328,57 @@
 // - Finally, call the checkValue function with value as the argument.
 
 
-type ValueType = string | number | boolean;
+// type ValueType = string | number | boolean;
+//
+// let value: ValueType;
+// const random = Math.random();
+// value = random < 0.33 ? 'Hello' : random < 0.66 ? 123.456 : true;
+//
+// function checkValue (value: ValueType): string | number | void {
+//     if (typeof value === 'string') {
+//         console.log(value.toLowerCase());
+//         return;
+//     }
+//     else if (typeof value === 'number') {
+//         console.log(value.toFixed(2));
+//         return;
+//     }
+//     else {
+//         console.log(`boolean: ${value}`);
+//     }
+// }
+//
+// checkValue(value);
 
-let value: ValueType;
-const random = Math.random();
-value = random < 0.33 ? 'Hello' : random < 0.66 ? 123.456 : true;
+// ## Challenge 9 - Equality Narrowing
+//
+// In TypeScript, equality narrowing is a form of type narrowing that occurs when you use equality checks like === or !== in your code
+//
+// - starter code
+//
+//     ```ts
+// type Dog = { type: 'dog'; name: string; bark: () => void };
+// type Cat = { type: 'cat'; name: string; meow: () => void };
+// type Animal = Dog | Cat;
+// ```
+//
+// - Define a function named makeSound that takes one parameter animal of type Animal.
+// - Inside the function, use an if statement to check if animal.type is 'dog'.
+// - If animal.type is 'dog', TypeScript knows that animal is a Dog in this block. In this case, call the bark method of animal.
+// - If animal.type is not 'dog', TypeScript knows that animal is a Cat in the else block. In this case, call the meow method of animal.
+// - Now you can call the makeSound function with an Animal as the argument. The function will call the appropriate method (bark or meow) depending on the type of the animal.
 
-function checkValue (value: ValueType): string | number | void {
-    if (typeof value === 'string') {
-        console.log(value.toLowerCase());
-        return;
-    }
-    else if (typeof value === 'number') {
-        console.log(value.toFixed(2));
-        return;
+
+type Dog = { type: 'dog'; name: string; bark: () => void };
+type Cat = { type: 'cat'; name: string; meow: () => void };
+type Animal = Dog | Cat;
+
+function makeSound( animal:Animal ): void {
+    if (animal.type === 'dog') {
+        animal.bark();
     }
     else {
-        console.log(`boolean: ${value}`);
+        animal.meow();
     }
 }
 
-checkValue(value);
